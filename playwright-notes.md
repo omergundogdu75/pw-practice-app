@@ -18,3 +18,35 @@
 6. **`test.afterEach(async ({ page }) => { ... });`**
    - Her testten sonra çalışacak bir temizlik fonksiyonu tanımlar.
 
+---
+
+### Locator Syntax Açıklamaları
+
+1. **`await page.locator('input').first().click();`**
+   - Sayfadaki ilk `input` etiketine tıklar.
+
+2. **`await page.locator('#inputEmail1').click();`**
+   - `id` değeri `inputEmail1` olan öğeye tıklar.
+
+3. **`await page.locator('.input-full-width');`**
+   - `class` değeri `input-full-width` olan öğeyi seçer.
+
+4. **`await page.locator('[placeholder="Email"]');`**
+   - `placeholder` özelliği `Email` olan öğeyi seçer.
+
+5. **`await page.locator('[class="input-full-width size-medium shape-rectangle"]');`**
+   - Tam `class` değeri `input-full-width size-medium shape-rectangle` olan öğeyi seçer.
+
+6. **`await page.locator('input[placeholder="Email"][nbinput]');`**
+   - `input` etiketi olup `placeholder` özelliği `Email` ve `nbinput` özelliği olan öğeyi seçer.
+
+7. **`await page.locator('//input[@placeholder="Email"]');`**
+   - XPath kullanarak `placeholder` özelliği `Email` olan öğeyi seçer (kullanımı önerilmez).
+
+8. **`await page.locator(':text("Using")');`**
+   - Metni kısmen `Using` olan öğeyi seçer.
+
+9. **`await page.locator(':text-is("Using the Grid")');`**
+   - Metni tam olarak `Using the Grid` olan öğeyi seçer.
+
+
