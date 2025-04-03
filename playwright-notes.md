@@ -49,4 +49,26 @@
 9. **`await page.locator(':text-is("Using the Grid")');`**
    - Metni tam olarak `Using the Grid` olan öğeyi seçer.
 
+---
+
+### User Facing Locators Açıklamaları
+
+1. **`await page.getByRole('textbox', { name: 'Email' }).first().click();`**
+   - `role` değeri `textbox` ve adı `Email` olan ilk öğeyi bulur ve tıklar.
+
+2. **`await page.getByRole('button', { name: 'Sign in' }).first().click();`**
+   - `role` değeri `button` ve adı `Sign in` olan ilk öğeyi bulur ve tıklar.
+
+3. **`await page.getByLabel('Email').first().click();`**
+   - `label` değeri `Email` olan ilk öğeyi bulur ve tıklar.
+
+4. **`await page.getByPlaceholder('Jane Doe').click();`**
+   - `placeholder` değeri `Jane Doe` olan öğeyi bulur ve tıklar.
+
+5. **`await page.getByText('Using the Grid').click();`**
+   - Metni `Using the Grid` olan öğeyi bulur ve tıklar.
+
+6. **`await page.getByTestId('SignIn').click();`**
+   - `test-id` değeri `SignIn` olan öğeyi bulur ve tıklar.
+
 
