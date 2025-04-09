@@ -194,7 +194,72 @@ test('web tables', async ({ page }) => { // 'Web tables' testini tanımlıyoruz.
 
     }
 
-
-
-
 }); // 'Web tables' testini tanımlıyoruz. 
+
+test('datepicker', async ({ page }) => {
+
+    await page.getByText('Forms').click();
+    await page.getByText('Datepicker').click();
+
+    const calendarInputField = page.getByPlaceholder('Form picker')
+    await calendarInputField.click();
+
+
+    let date = new Date();
+    date.setDate(date.getDate() + 30)
+    const expectedDay = date.getDate().toString()
+    const expectedMonthShort = date.toLocaleString('En-US', { month: 'short' })
+    const expectedMonthLong = date.toLocaleString('En-US', { month: 'long' })
+
+    const expectedYear = date.getFullYear();
+    const dateToAssert = `${expectedMonthShort} ${expectedDay}, ${expectedYear}`
+
+    let calendarMonthAndYear = await page.locator('nb-calendar-view-mode').textContent()
+    const expectedMonthAndYear = ` ${expectedMonthLong} ${expectedYear} `
+
+    while (!calendarMonthAndYear.includes(expectedMonthAndYear)) {
+
+        await page.locator('nb-calendar-pageable-navigation [data-name="chevron-right"]').click()
+        calendarMonthAndYear = await page.locator('nb-calendar-view-mode').textContent()
+
+    }
+
+
+    await page.locator('[class="day-cell ng-star-inserted"]').getByText(expectedDay, { exact: true }).click();
+    await expect(calendarInputField).toHaveValue(dateToAssert)
+
+
+    // 2 
+
+
+
+
+}); // 'Datepicker' testini tanımlıyoruz.
+
+test('sliders', async ({ page }) => {
+
+    // Update attribute
+    // const tempGauge = page.locator('[tabtitle="Temperature"] ngx-temperature-dragger circle')
+    // await tempGauge.evaluate(node => {
+    //     node.setAttribute('cx', '232.63')
+    //     node.setAttribute('cy', '232.63')
+    // })
+    // await tempGauge.click();
+
+    //mouse movement
+    const tempBox = page.locator('[tabtitle="Temperature"] ngx-temperature-dragger')
+    await tempBox.scrollIntoViewIfNeeded()
+
+    const box = await tempBox.boundingBox()
+
+    const x = box.x + box.width / 2
+    const y = box.y + box.width / 2
+
+    await page.mouse.move(x, y)
+    await page.mouse.down();
+    await page.mouse.move(x + 100, y)
+    await page.mouse.move(x + 100, y + 100);
+    await page.mouse.up();
+    await expect(tempBox).toContainText('30')
+
+}) 
