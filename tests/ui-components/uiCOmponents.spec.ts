@@ -263,3 +263,6 @@ test('sliders', async ({ page }) => {
     await expect(tempBox).toContainText('30')
 
 }) 
+
+
+// drag and drop
