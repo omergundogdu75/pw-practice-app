@@ -27,15 +27,12 @@ export class NavigationPage {
 
     async toastrPage(){
         await this.selectGroupMenuItem('Modal & Overlays');      
-     
         await this.page.getByText('Toastr').click();
     }
 
     async tooltipPage(){
         await this.selectGroupMenuItem('Modal & Overlays');      
-
         await this.page.getByText('Tooltip').click();
-    
     }
 
 

@@ -17,18 +17,13 @@ test.describe('Form Layouts page', () => { // 'Form Layouts' sayfasını tanıml
     test('input fields', async ({ page }) => { // 'Input fields' testini tanımlıyoruz.
 
         const usingTheGridEmailInput = page.locator('nb-card').filter({ hasText: 'Using the Grid' }).getByRole('textbox', { name: 'Email' }); // 'Using the Grid' kartındaki 'Email' alanını buluyoruz.
-
         await usingTheGridEmailInput.fill('test@test.com');
-
         await usingTheGridEmailInput.clear(); // 'Email' alanını temizliyoruz.
-
         await usingTheGridEmailInput.pressSequentially('test2@test.com', { delay: 500 });
-
 
         // generic assertions
         const inputValue = await usingTheGridEmailInput.inputValue(); // 'Email' alanının değerini alıyoruz.
         expect(inputValue).toBe('test2@test.com');
-
         //locator assertions
         await expect(usingTheGridEmailInput).toHaveValue('test2@test.com');
 
@@ -37,7 +32,6 @@ test.describe('Form Layouts page', () => { // 'Form Layouts' sayfasını tanıml
     test('radio buttons', async ({ page }) => { // 'Radio buttons' testini tanımlıyoruz.
 
         const usingTheGridForm = page.locator('nb-card').filter({ hasText: 'Using the Grid' });
-
         //await usingTheGridForm.getByLabel('Option 1').check({force:true}); // 'Option 1' seçeneğini işaretliyoruz.
         await usingTheGridForm.getByRole('radio', { name: 'Option 1' }).check({ force: true }); // 'Option 1' seçeneğini işaretliyoruz.
 
