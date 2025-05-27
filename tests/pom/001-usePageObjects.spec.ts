@@ -3,7 +3,7 @@ import { PageManager } from '../../page-objects/pageManager';
 import { faker } from '@faker-js/faker';
 
 test.beforeEach(async ({page}) => {
-    await page.goto('http://localhost:4200/');
+    await page.goto('/');
 })
 
 
@@ -27,7 +27,7 @@ test('parameterized method', async ({page})=>{
     const randomPassword = faker.internet.password();
 
     await pm.navigateTo().formLayoutPage();
-    await pm.onFormLayoutsPage().submitUsingTheGridFormWithCreadantialsAndSelectOption('test@test.com','123456','Option 1');
+    await pm.onFormLayoutsPage().submitUsingTheGridFormWithCreadantialsAndSelectOption(process.env.USERNAME,'123456','Option 1');
     await page.screenshot({path: 'screenshots/form-layouts.png'});
     const buffer = await page.screenshot();
     console.log(buffer.toString('base64')); // Log the screenshot as a base64 string

@@ -1,6 +1,6 @@
 # Playwright Kullanılan Kodlar ve Açıklamaları
 
-1. **`await page.goto('http://localhost:4200/');`**
+1. **`await page.goto('/');`**
    - Belirtilen URL'ye gitmek için kullanılır.
 
 2. **`await page.getByText('Forms').click();`**

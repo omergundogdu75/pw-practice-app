@@ -1,4 +1,7 @@
- import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test';
+import { TestOptions } from './test-options';
+
+
 
 /**
  * Read environment variables from file.
@@ -11,7 +14,7 @@
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-export default defineConfig({
+export default defineConfig<TestOptions>({
   // globalTimeout: 60 * 1000,
   // timeout: 30 * 1000,
   // expect: {
@@ -31,13 +34,16 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://127.0.0.1:3000',
+    // baseURL: 'http://localhost:4200/',
+    globalSQaUrl: 'https://www.globalsqa.com/demo-site/draganddrop/',
+    baseURL: process.env.DEV === "1" ? 'http://localhost:4200/'
+      : process.env.STAGING ? 'http://localhost:4202/' : 'http://localhost:4201/',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     // actionTimeout:5 * 1000,
     // navigationTimeout: 10 * 1000
-    video:{
+    video: {
       mode: 'on', // 'on' | 'off' | 'retain-on-failure'
       size: { width: 1280, height: 720 }, // Set    video size
     }
@@ -46,9 +52,27 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
+      name: 'dev',
+      use: {
+        ...devices['Desktop Chrome'],
+        baseURL: 'http://localhost:4201/',
+
+
+      },
+
+    },
+    {
+      name: 'staging',
+      use: {
+        ...devices['Desktop Chrome']
+        , baseURL: 'http://localhost:4202/',
+
+      },
+    },
+    {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
-      fullyParallel: true,
+      // fullyParallel: true,
     },
 
     {

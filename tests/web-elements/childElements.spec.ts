@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => { // Her testten önce çalışacak olan bir fonksiyon tanımlıyoruz.
-    await page.goto('http://localhost:4200/'); // Test sırasında belirtilen URL'ye gidiyoruz.
+    await page.goto('/'); // Test sırasında belirtilen URL'ye gidiyoruz.
     await page.getByText('Forms').click(); // Sayfada 'Forms' metnini bulup tıklıyoruz.
     await page.getByText('Form Layouts').click(); // 'Forms Layouts' metnini bulup tıklıyoruz.
 

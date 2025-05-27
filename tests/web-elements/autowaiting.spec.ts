@@ -2,7 +2,7 @@ import {test} from '@playwright/test';
 import {expect} from '@playwright/test';
 
 test.beforeEach(async ({page}) => { // Her testten önce çalışacak olan bir fonksiyon tanımlıyoruz.
-    await page.goto('http://www.uitestingplayground.com/ajax/'); // Test sırasında belirtilen URL'ye gidiyoruz.
+    await page.goto(process.env.URL); // Test sırasında belirtilen URL'ye gidiyoruz.
     await page.getByText('Button Triggering AJAX Request').click(); 
 
 });
