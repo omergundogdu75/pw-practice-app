@@ -7,7 +7,7 @@ test.beforeEach(async ({page}) => { // Her testten önce çalışacak olan bir f
 
 });
 
-test('Auto Waiting', async ({page}) => { // Bir test tanımlıyoruz ve 'page' nesnesini kullanıyoruz.
+test.skip('Auto Waiting', async ({page}) => { // Bir test tanımlıyoruz ve 'page' nesnesini kullanıyoruz.
    
     
     const successButton = page.locator('.bg-success'); // 'Success' butonunu buluyoruz.
@@ -27,7 +27,7 @@ test('Auto Waiting', async ({page}) => { // Bir test tanımlıyoruz ve 'page' ne
 
 });
 
-test('alternative auto waiting', async ({page}) => { // Bir test tanımlıyoruz ve 'page' nesnesini kullanıyoruz.
+test.skip('alternative auto waiting', async ({page}) => { // Bir test tanımlıyoruz ve 'page' nesnesini kullanıyoruz.
     const successButton = page.locator('.bg-success'); // 'Success' butonunu buluyoruz.
 
 

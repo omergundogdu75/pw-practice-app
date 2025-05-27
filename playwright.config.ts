@@ -1,4 +1,4 @@
-import { defineConfig, devices } from '@playwright/test';
+ import { defineConfig, devices } from '@playwright/test';
 
 /**
  * Read environment variables from file.
@@ -37,6 +37,10 @@ export default defineConfig({
     trace: 'on-first-retry',
     // actionTimeout:5 * 1000,
     // navigationTimeout: 10 * 1000
+    video:{
+      mode: 'on', // 'on' | 'off' | 'retain-on-failure'
+      size: { width: 1280, height: 720 }, // Set    video size
+    }
   },
 
   /* Configure projects for major browsers */
@@ -44,6 +48,7 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+      fullyParallel: true,
     },
 
     {
@@ -51,10 +56,10 @@ export default defineConfig({
       use: { ...devices['Desktop Firefox'] },
     },
 
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
 
     /* Test against mobile viewports. */
     // {

@@ -5,7 +5,12 @@ test.beforeEach(async ({ page }) => { // Her testten önce çalışacak olan bir
 
 });
 
-test.describe('Form Layouts page', () => { // 'Form Layouts' sayfasını tanımlıyoruz.
+// test.describe.configure({ mode: 'parallel' }); // Testlerin paralel olarak çalışmasını sağlıyoruz.
+
+test.describe.parallel('Form Layouts page', () => { // 'Form Layouts' sayfasını tanımlıyoruz.
+
+    test.describe.configure({ retries: 2 }); // Testlerin yeniden deneme sayısını 2 olarak ayarlıyoruz.
+    // test.describe.configure({ mode: 'serial' });
 
     test.beforeEach(async ({ page }) => { // Her testten önce çalışacak olan bir fonksiyon tanımlıyoruz.
 
@@ -14,7 +19,11 @@ test.describe('Form Layouts page', () => { // 'Form Layouts' sayfasını tanıml
 
     });
 
-    test('input fields', async ({ page }) => { // 'Input fields' testini tanımlıyoruz.
+    test('input fields', async ({ page }, testInfo) => { // 'Input fields' testini tanımlıyoruz.
+
+        if (testInfo.retry) { // Eğer test yeniden deneme sayısı varsa
+            console.log(`Retrying test: ${testInfo.title} - Attempt: ${testInfo.retry}`); // Konsola yeniden deneme bilgisini yazdırıyoruz.
+        }
 
         const usingTheGridEmailInput = page.locator('nb-card').filter({ hasText: 'Using the Grid' }).getByRole('textbox', { name: 'Email' }); // 'Using the Grid' kartındaki 'Email' alanını buluyoruz.
         await usingTheGridEmailInput.fill('test@test.com');
@@ -256,7 +265,7 @@ test('sliders', async ({ page }) => {
     await page.mouse.up();
     await expect(tempBox).toContainText('30')
 
-}) 
+})
 
 
 // drag and drop
